@@ -341,6 +341,97 @@ div.tocify {
 
 
 <p>This is my PM566 Final Project website.</p>
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div id="this-is-for-the-second-question" class="section level1">
+<h1>this is for the second question</h1>
+<p>summary(housing)</p>
+<p>income_40th_percentile &lt;- quantile(housing<span
+class="math inline">\(median_income, 0.40) income_60th_percentile &lt;-
+quantile(housing\)</span>median_income, 0.60)</p>
+<p>filtered_data &lt;- housing %&gt;% filter(median_income &gt;=
+income_40th_percentile &amp; median_income &lt;=
+income_60th_percentile)</p>
+<p>p &lt;- ggplot(filtered_data, aes(x = median_income, y =
+median_house_value, color = median_house_value)) + geom_point(alpha =
+0.5) + scale_color_gradient(low = “blue”, high = “red”, breaks =
+pretty_breaks(n = 5)(range(filtered_data$median_house_value)), labels =
+scales::label_comma()) + geom_smooth(method = ‘gam’, formula = y ~ s(x,
+bs = “cs”), color = “black”) + scale_x_continuous(labels =
+scales::label_comma()) + scale_y_continuous(labels =
+scales::label_comma()) + # Add this line to format y axis
+theme_minimal()</p>
+<p>p ggplotly(p)</p>
+</div>
+<div id="this-is-for-third-question" class="section level1">
+<h1>this is for third question</h1>
+<p>fig &lt;- plot_ly(data = housing, x = ~longitude, y = ~latitude, z =
+~median_house_value, type = ‘scatter3d’, mode = ‘markers’, marker =
+list(size = 2, color = ~median_house_value, colorscale =
+‘Bluered’,<br />
+colorbar = list(title = ‘House Price’), opacity = 0.8))</p>
+<p>fig &lt;- fig %&gt;% layout(title = ‘3D Spatial Distribution of House
+Prices’, scene = list(xaxis = list(title = ‘Longitude’), yaxis =
+list(title = ‘Latitude’), zaxis = list(title = ‘Price’)))</p>
+<p>fig</p>
+</div>
+<div id="this-is-for-fourth-question" class="section level1">
+<h1>this is for fourth question</h1>
+<p>housing<span class="math inline">\(`Distance to Los Angeles` &lt;-
+housing\)</span><code>Distance to Los Angeles</code> * 0.000621371</p>
+<p>housing<span class="math inline">\(`Distance to San Diego` &lt;-
+housing\)</span><code>Distance to San Diego</code> * 0.000621371</p>
+<p>housing<span class="math inline">\(`Distance to San Francisco` &lt;-
+housing\)</span><code>Distance to San Francisco</code> * 0.000621371</p>
+<p>housing<span class="math inline">\(`Distance to San Jose` &lt;-
+housing\)</span><code>Distance to San Jose</code> * 0.000621371</p>
+<p>la_near_housing &lt;- housing %&gt;%
+filter(<code>Distance to Los Angeles</code> &lt;= 200)</p>
+<p>p &lt;- ggplot(la_near_housing, aes(x =
+<code>Distance to Los Angeles</code>, y = median_house_value, color =
+median_house_value)) + geom_point(alpha = 0.5) +
+scale_color_gradient(low = “blue”, high = “red”, breaks =
+pretty_breaks(n = 5)(range(la_near_housing$median_house_value)), labels
+= label_comma()) + geom_smooth(method = ‘gam’, formula = y ~ s(x, bs =
+“cs”), color = “black”) + scale_x_continuous(labels = label_comma()) +
+theme_minimal()</p>
+<p>ggplotly(p)</p>
+</div>
+<div id="for-sd" class="section level1">
+<h1>for sd</h1>
+<p>sd_near_housing &lt;- housing %&gt;%
+filter(<code>Distance to San Diego</code> &lt;= 150)</p>
+<p>p_sd &lt;- ggplot(sd_near_housing, aes(x =
+<code>Distance to San Diego</code>, y = median_house_value, color =
+median_house_value)) + geom_point(alpha = 0.5) +
+scale_color_gradient(low = “blue”, high = “red”, breaks =
+pretty_breaks(n = 5)(range(sd_near_housing$median_house_value)), labels
+= label_comma()) + geom_smooth(method = ‘gam’, formula = y ~ s(x, bs =
+“cs”), color = “black”) + scale_x_continuous(labels = label_comma()) +
+theme_minimal()</p>
+<p>ggplotly(p_sd)</p>
+</div>
+<div id="this-is-for-fifth-question" class="section level1">
+<h1>this is for fifth question</h1>
+<p>fig &lt;- plot_ly(data = housing, x = ~longitude, y = ~latitude, z =
+~housing_median_age, type = ‘scatter3d’, mode = ‘markers’, marker =
+list(size = 2, color = ~housing_median_age, colorscale =
+‘Bluered’,<br />
+colorbar = list(title = ‘House age’), opacity = 0.8))</p>
+<p>fig &lt;- fig %&gt;% layout(title = ‘3D Spatial Distribution of
+housing_median_age’, scene = list(xaxis = list(title = ‘Longitude’),
+yaxis = list(title = ‘Latitude’), zaxis = list(title =
+‘housing_median_age’)))</p>
+<p>fig</p>
+<p>summary(housing)</p>
+<p>p &lt;- ggplot(housing, aes(x = housing_median_age)) +
+geom_histogram(binwidth = 1, fill = “blue”, color = “black”) +
+labs(title = “Histogram of Housing Median Age”, x = “Housing Median
+Age”, y = “Frequency”) + theme_minimal()</p>
+</div>
+<div id="print-the-plot" class="section level1">
+<h1>Print the plot</h1>
+<p>p ```</p>
+</div>
 
 
 
