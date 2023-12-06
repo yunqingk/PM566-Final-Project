@@ -9,6 +9,11 @@ output:
 
 This is my PM566 Final Project website.
 
+# Introduction
+In this project, I'll be analyzing a data set for California housing prices in 1990. This data set contains various features related to housing in different districts in California, such as longitude, latitude, median income, housing median age, median housing value, etc. The questions that I will answer are: 1) is there any correlations between the median income and median housing value; 2) what is the distribution pattern of housing value across California; 3) whether ocean proximity is necessary in this dataset; 4) check if there is correlation between other variables
+
+
+# Interactive visualizations
 ```{r setup, message=FALSE, echo=FALSE, warning=FALSE}
 library(data.table)
 library(tidyverse)
@@ -21,8 +26,6 @@ library(reshape2)
 
 library(scales) 
 ```
-
-
 
 
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
@@ -57,7 +60,8 @@ for (city in names(coordinates)) {
 
 ```
 
-
+## 1
+From the correlation matrix, we can see that there is a strong positive correlation between median income and median house value. The higher the income, the more expensive their housing. 
 
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 #  this is for the first  question
@@ -78,15 +82,14 @@ p <- ggplot(melted_cor_matrix, aes(Var1, Var2, fill = value)) +
         axis.title.x = element_blank(),
         axis.title.y = element_blank())
 
-
+p
 ```
 
+## 2
+I extracted the data that falls into the 40%-60% quantile of median_income data. Then I made this scatter plot to show what is the house value of people with medians of median_income. After adding the trend line, it appears that the housing value of people with income between 30k and 40k is 180000-210000. 
 
-
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
 #  this is for the second question
-
-
-summary(housing)
 
 
 income_40th_percentile <- quantile(housing$median_income, 0.40)
@@ -106,16 +109,12 @@ p <- ggplot(filtered_data, aes(x = median_income, y = median_house_value, color 
   scale_y_continuous(labels = scales::label_comma()) + # Add this line to format y axis
   theme_minimal()
 
-
-
-
 p
-ggplotly(p)
+
+```
 
 
-
-
-
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
 # this is for third question
 
 fig <- plot_ly(data = housing, x = ~longitude, y = ~latitude, z = ~median_house_value, 
@@ -131,13 +130,11 @@ fig <- fig %>% layout(title = '3D Spatial Distribution of House Prices',
                                    yaxis = list(title = 'Latitude'),
                                    zaxis = list(title = 'Price')))
 
-
 fig
 
+```
 
-
-
- 
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
 # this is for fourth question
 
 housing$`Distance to Los Angeles` <- housing$`Distance to Los Angeles` * 0.000621371
@@ -162,12 +159,12 @@ p <- ggplot(la_near_housing, aes(x = `Distance to Los Angeles`, y = median_house
   scale_x_continuous(labels = label_comma()) +
   theme_minimal()
 
-
-ggplotly(p)
-
-
+p
+```
 
 
+
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
 # for sd 
 sd_near_housing <- housing %>% 
   filter(`Distance to San Diego` <= 150)
@@ -183,12 +180,11 @@ p_sd <- ggplot(sd_near_housing, aes(x = `Distance to San Diego`, y = median_hous
   theme_minimal()
 
 
-ggplotly(p_sd)
+```
 
+
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
 # this is for fifth question
-
-
-
 
 fig <- plot_ly(data = housing, x = ~longitude, y = ~latitude, z = ~housing_median_age, 
                type = 'scatter3d', mode = 'markers',
@@ -206,18 +202,14 @@ fig <- fig %>% layout(title = '3D Spatial Distribution of housing_median_age',
 
 fig
 
-
-
-summary(housing)
-
 p <- ggplot(housing, aes(x = housing_median_age)) +
   geom_histogram(binwidth = 1, fill = "blue", color = "black") +
   labs(title = "Histogram of Housing Median Age",
        x = "Housing Median Age",
        y = "Frequency") +
   theme_minimal()
-
-# Print the plot
-p
 ```
 
+# Report
+Below is the link to my writtern report: 
+[Download PDF](./.pdf)
