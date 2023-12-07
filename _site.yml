@@ -1,7 +1,7 @@
 name: "my-website"
 output_dir: "docs"
 navbar:
-  title: "My Website"
+  title: "PM566 Final Project"
   left:
     - text: "Home"
       href: index.html

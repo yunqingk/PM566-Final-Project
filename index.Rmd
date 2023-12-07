@@ -210,6 +210,6 @@ p <- ggplot(housing, aes(x = housing_median_age)) +
   theme_minimal()
 ```
 
-# Report
-Below is the link to my writtern report: 
-[Download PDF](./.pdf)
+# Download Report
+The writtern report is available to be downloaded here: 
+[Download PDF](./PM566_Final_Project_ written_report.pdf)
