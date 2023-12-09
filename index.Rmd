@@ -7,10 +7,11 @@ output:
         toc_float: TRUE
 ---
 
-This is my PM566 Final Project website.
-
 # Introduction
-In this project, I'll be analyzing a data set for California housing prices in 1990. This data set contains various features related to housing in different districts in California, such as longitude, latitude, median income, housing median age, median housing value, etc. The questions that I will answer are: 1) is there any correlations between the median income and median housing value; 2) what is the distribution pattern of housing value across California; 3) whether ocean proximity is necessary in this dataset; 4) check if there is correlation between other variables
+The Californian housing market stands as a multifaceted landscape shaped by a myriad of socio-economic and geographical factors. Understanding the intricate dynamics governing property values and development across this region is pivotal, not only for real estate professionals but also for policymakers and individuals seeking insights into housing trends and patterns.
+
+This project embarks on an in-depth exploration into the Californian housing market using a robust dataset sourced from the 1990 census. The primary objective is to unravel the intricate relationships between various factors influencing housing prices, with a particular focus on income levels, geographical coordinates, and housing age distribution.
+
 
 
 # Interactive visualizations
@@ -60,8 +61,8 @@ for (city in names(coordinates)) {
 
 ```
 
-## 1
-From the correlation matrix, we can see that there is a strong positive correlation between median income and median house value. The higher the income, the more expensive their housing. 
+### 1. Correlation Between Variables
+To assess the strength of correlation between the continuous variables within the dataset, an initial analysis was conducted to validate the expected relationships between specific variables. This correlation matrix presents an overall examination of the interrelationships between variables. 
 
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 #  this is for the first  question
@@ -85,8 +86,8 @@ p <- ggplot(melted_cor_matrix, aes(Var1, Var2, fill = value)) +
 p
 ```
 
-## 2
-I extracted the data that falls into the 40%-60% quantile of median_income data. Then I made this scatter plot to show what is the house value of people with medians of median_income. After adding the trend line, it appears that the housing value of people with income between 30k and 40k is 180000-210000. 
+### 2. House Value for the Medians of Median_Income
+A focused analysis was undertaken to validate whether individuals falling within the 40%-60% percentile range of median_income also exhibit house values within the corresponding median range of median_house_value data. The 40%-60% percentile of median_income corresponds to \$30,000 to \$40,000 USD. From the trend line, incomes ranging between \$30,000 and \$40,000 have house values spanning from \$180,000 to \$210,000, which is close to the calculated 40%-60% percentile range of median_house_value.
 
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 #  this is for the second question
@@ -114,6 +115,9 @@ p
 ```
 
 
+### 3. Location House Value
+This 3D projection using longitude, latitude, and median_house_value offers a perspective on how location influences housing prices. The dynamic nature of the interactive model further allows users to explore and navigate through the geographical landscape, gaining an understanding of how specific locations correspond to varying median_house_values.
+
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 # this is for third question
 
@@ -133,6 +137,10 @@ fig <- fig %>% layout(title = '3D Spatial Distribution of House Prices',
 fig
 
 ```
+
+
+### 4. House Values Around Los Angeles Area
+This scatter plot coupled with a trend line illustrates the fluctuation in house values concerning the distance from the center of Los Angeles
 
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 # this is for fourth question
@@ -163,7 +171,6 @@ p
 ```
 
 
-
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 # for sd 
 sd_near_housing <- housing %>% 
@@ -182,6 +189,9 @@ p_sd <- ggplot(sd_near_housing, aes(x = `Distance to San Diego`, y = median_hous
 
 ```
 
+
+### 5. Pattern of Housing Median Age Across California
+Even though the correlation between housing_median_age and geographical location (longitude/latitude) according to the correlation matrix, the 3D projection below offers additional insights: Across geographical coordinates, there are both new and old houses on each coordinate, indicating a evenly spread real estate development pattern
 
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 # this is for fifth question
@@ -210,6 +220,8 @@ p <- ggplot(housing, aes(x = housing_median_age)) +
   theme_minimal()
 ```
 
-# Download Report
+
+
+# Download the Report
 The writtern report is available to be downloaded here: 
 [Download PDF](./PM566_Final_Project_ written_report.pdf)
